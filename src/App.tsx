@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import HiddenWrapper from "./components/HiddenWrapper";
+import CompanyC from "./CompanyC";
 
 import "./App.css";
-import withHiddenWrapper from "./components/withHiddenWrapper";
 
 export const hideCompanyIds = [1, 2, 5, 8, 12];
-
-function CompanyCView() {
-  return <h2>公司C的视图</h2>;
-}
-
-const CompanyC = withHiddenWrapper(CompanyCView);
 
 function App() {
   const [companyAId, setCompanyAId] = useState<number>(0);
   const [companyBId, setCompanyBId] = useState<number>(0);
-  const [companyCIds, setCompanyCIds] = useState<number[]>([]);
+
   return (
     <div className="App">
       <header>
@@ -25,7 +19,6 @@ function App() {
       <div>需要隐藏的公司Id: {hideCompanyIds.join(",")}</div>
       <div>companyAId: {companyAId}</div>
       <div>companyBId: {companyBId}</div>
-      <div>companyCIds: {companyCIds.join(",")}</div>
 
       <HiddenWrapper hidde={hideCompanyIds.includes(companyAId)}>
         <h2>公司A的视图</h2>
@@ -33,7 +26,7 @@ function App() {
       <HiddenWrapper hidde={hideCompanyIds.includes(companyBId)}>
         <h2>公司B的视图</h2>
       </HiddenWrapper>
-      <CompanyC ids={companyCIds} />
+      <CompanyC />
 
       <button
         onClick={() => {
@@ -50,13 +43,6 @@ function App() {
         }}
       >
         设置公司B Id
-      </button>
-      <button
-        onClick={() => {
-          setCompanyCIds([0, 1, 2]);
-        }}
-      >
-        设置公司C Ids
       </button>
     </div>
   );
